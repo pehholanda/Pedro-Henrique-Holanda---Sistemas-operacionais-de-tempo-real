@@ -1,13 +1,11 @@
-// Comunicação entre processos (pipe)
-// Exemplo de IPC (Inter-Process Communication) simples com pipe.
-//
+
 // Compilação e execução:
 //   gcc pipe_example.c -o pipe_example
 //   ./pipe_example
 
-#include <stdio.h>    // printf
-#include <unistd.h>   // fork, pipe, read, write, close
-#include <string.h>   // strlen
+#include <stdio.h>    
+#include <unistd.h>   
+#include <string.h>   
 
 int main() {
     int fd[2];          // descritores de arquivo do pipe: fd[0] = leitura, fd[1] = escrita
@@ -22,9 +20,7 @@ int main() {
 
     // Cria um processo filho (duplica o processo atual).
     if (fork() == 0) {
-        // ================================
         // BLOCO DO FILHO
-        // ================================
         close(fd[0]); // o filho não vai ler, então fecha o descritor de leitura
 
         char msg[] = "Mensagem do filho!";
@@ -34,9 +30,7 @@ int main() {
 
         close(fd[1]); // fecha o descritor de escrita (boa prática)
     } else {
-        // ================================
         // BLOCO DO PAI
-        // ================================
         close(fd[1]); // o pai não vai escrever, então fecha o descritor de escrita
 
         // lê do pipe (bloqueia até o filho escrever algo)
