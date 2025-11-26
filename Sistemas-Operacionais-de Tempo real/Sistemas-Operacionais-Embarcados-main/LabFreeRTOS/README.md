@@ -1,0 +1,1 @@
+Esta pasta contém vários exemplos do FreeRTOS.
